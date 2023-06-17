@@ -5,7 +5,7 @@ import Date from "../../components/date";
 import utilStyles from "../../styles/utils.module.css";
 import { GetStaticProps, GetStaticPaths } from "next";
 
-export default function Post({
+function Post({
   postData,
 }: {
   postData: {
@@ -30,7 +30,7 @@ export default function Post({
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();
   return {
     paths,
@@ -38,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+const getStaticProps: GetStaticProps = async ({ params }) => {
   const postData = await getPostData(params?.id as string);
   return {
     props: {
@@ -46,3 +46,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   };
 };
+
+export default Post;
+export { getStaticPaths, getStaticProps };
